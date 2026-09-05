@@ -1,0 +1,387 @@
+/* TicEase design tokens — scoped under .tic-root so this can't leak into
+   the rest of the host app's styles. Values match the TicEase design doc. */
+
+.tic-root {
+  --tic-primary: #5b6ee1;
+  --tic-primary-dark: #4457c4;
+  --tic-secondary: #7bc8a4;
+  --tic-bg: #f7f8fc;
+  --tic-surface: #ffffff;
+  --tic-text: #202338;
+  --tic-muted: #676b82;
+  --tic-warning: #f4a261;
+  --tic-emergency: #d9534f;
+  --tic-border: #e1e3f0;
+
+  background: var(--tic-bg);
+  color: var(--tic-text);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.tic-root * {
+  box-sizing: border-box;
+}
+
+.tic-main {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 18px 100px;
+}
+
+.tic-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--tic-bg);
+  border-bottom: 1px solid var(--tic-border);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tic-header-inner {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tic-wordmark {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--tic-primary-dark);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.tic-page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 4px 0 4px;
+  color: var(--tic-text);
+}
+
+.tic-page-sub {
+  font-size: 14px;
+  color: var(--tic-muted);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.tic-card {
+  background: var(--tic-surface);
+  border: 1px solid var(--tic-border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.tic-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tic-muted);
+  margin-bottom: 10px;
+}
+
+.tic-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+  text-decoration: none;
+  width: 100%;
+}
+
+.tic-btn:active {
+  transform: scale(0.98);
+}
+
+.tic-btn-primary {
+  background: var(--tic-primary);
+  color: white;
+}
+.tic-btn-primary:hover {
+  background: var(--tic-primary-dark);
+}
+
+.tic-btn-secondary {
+  background: rgba(91, 110, 225, 0.09);
+  color: var(--tic-primary-dark);
+}
+
+.tic-btn-quiet {
+  background: transparent;
+  color: var(--tic-muted);
+  border: 1px solid var(--tic-border);
+}
+
+.tic-btn-emergency {
+  background: var(--tic-emergency);
+  color: white;
+}
+
+.tic-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tic-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tic-chip {
+  border: 1px solid var(--tic-border);
+  background: var(--tic-surface);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13.5px;
+  color: var(--tic-text);
+  cursor: pointer;
+}
+
+.tic-chip[data-selected="true"] {
+  background: var(--tic-primary);
+  border-color: var(--tic-primary);
+  color: white;
+}
+
+.tic-slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--tic-muted);
+  margin-top: 4px;
+}
+
+.tic-slider {
+  width: 100%;
+  accent-color: var(--tic-primary);
+}
+
+.tic-progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--tic-border);
+  overflow: hidden;
+}
+
+.tic-progress-fill {
+  height: 100%;
+  background: var(--tic-secondary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.tic-quote {
+  background: rgba(91, 110, 225, 0.07);
+  border-left: 3px solid var(--tic-primary);
+  padding: 12px 14px;
+  border-radius: 0 10px 10px 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--tic-text);
+  margin-bottom: 14px;
+}
+
+.tic-caption {
+  font-size: 12px;
+  color: var(--tic-muted);
+  line-height: 1.5;
+}
+
+/* Bottom navigation */
+.tic-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tic-surface);
+  border-top: 1px solid var(--tic-border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+  z-index: 20;
+}
+
+.tic-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--tic-muted);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.tic-nav-item[data-active="true"] {
+  color: var(--tic-primary-dark);
+  background: rgba(91, 110, 225, 0.08);
+}
+
+.tic-nav-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Floating Help Now button */
+.tic-help-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 78px;
+  z-index: 30;
+  background: var(--tic-emergency);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 13.5px;
+  box-shadow: 0 6px 18px rgba(217, 83, 79, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tic-mood-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.tic-mood-btn {
+  flex: 1;
+  border: 1px solid var(--tic-border);
+  background: var(--tic-surface);
+  border-radius: 12px;
+  padding: 10px 4px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.tic-mood-btn[data-selected="true"] {
+  border-color: var(--tic-primary);
+  background: rgba(91, 110, 225, 0.09);
+}
+
+.tic-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--tic-border);
+  font-size: 13.5px;
+}
+.tic-stat-row:last-child {
+  border-bottom: none;
+}
+
+.tic-callout {
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.tic-callout-calm {
+  background: rgba(123, 200, 164, 0.15);
+  border: 1px solid rgba(123, 200, 164, 0.4);
+}
+
+.tic-textarea,
+.tic-input {
+  width: 100%;
+  border: 1px solid var(--tic-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--tic-text);
+  background: var(--tic-surface);
+}
+
+.tic-breathing-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 110, 225, 0.25), rgba(91, 110, 225, 0.06));
+  border: 2px solid var(--tic-primary);
+  margin: 0 auto;
+  transition: transform 4s ease-in-out;
+}
+
+.tic-tab-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+.tic-tab {
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--tic-border);
+  background: var(--tic-surface);
+  font-size: 13.5px;
+  color: var(--tic-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tic-tab[data-active="true"] {
+  background: var(--tic-primary);
+  color: white;
+  border-color: var(--tic-primary);
+}
+
+.tic-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--tic-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.tic-fullscreen p {
+  font-size: 22px;
+  line-height: 1.5;
+  max-width: 420px;
+}
+
+.tic-fullscreen button {
+  margin-top: 30px;
+}
