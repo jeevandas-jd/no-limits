@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   NeuroTrace design tokens
+   All components reference var(--nt-*) so a single .dark class
+   on <html> flips the entire app between modes.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Light mode (default) ─────────────────────────────── */
+:root {
+  /* Glass panel tokens */
+  --nt-glass:        rgba(252,251,249,0.74);
+  --nt-glass-hi:     rgba(252,251,249,0.97);
+  --nt-glass-border: rgba(255,255,255,0.68);
+  --nt-glass-shadow: 0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.82);
+  --nt-hdr:          rgba(252,251,249,0.80);
+  --nt-hdr-border:   rgba(255,255,255,0.62);
+
+  /* Text hierarchy */
+  --nt-text-hi:    rgba(18,16,14,0.88);
+  --nt-text-md:    rgba(0,0,0,0.65);
+  --nt-text-lo:    rgba(0,0,0,0.45);
+  --nt-text-xs:    rgba(0,0,0,0.30);
+  --nt-text-ghost: rgba(0,0,0,0.20);
+
+  /* Surfaces */
+  --nt-track:   rgba(0,0,0,0.07);
+  --nt-divider: rgba(0,0,0,0.06);
+  --nt-hover:   rgba(0,0,0,0.05);
+  --nt-active:  rgba(0,0,0,0.08);
+
+  /* Interactive */
+  --nt-btn-bg:  #111111;
+  --nt-btn-fg:  #ffffff;
+  --nt-icon:    rgba(0,0,0,0.42);
+
+  /* Waveform gradient stops */
+  --nt-wf-lo: rgba(186,117,23,0.55);
+  --nt-wf-hi: rgba(216,90,48,0.85);
+
+  /* Page background + dot grid */
+  --background:  #fcfbf9;
+  --nt-dot-grid: rgba(0,0,0,0.035);
+
+  /* GlassSurface brightness (used as a CSS var so page.tsx can read it) */
+  --nt-glass-brightness: 50;
+
+  /* Foreground for existing utility usage */
+  --foreground: rgba(18,16,14,0.88);
+}
+
+/* ─── Dark mode override ────────────────────────────────── */
+.dark {
+  --nt-glass:        rgba(10,15,30,0.74);
+  --nt-glass-hi:     rgba(8,12,24,0.97);
+  --nt-glass-border: rgba(199,217,250,0.13);
+  --nt-glass-shadow: 0 4px 24px rgba(0,0,0,0.42), inset 0 1px 0 rgba(199,217,250,0.08);
+  --nt-hdr:          rgba(10,15,30,0.80);
+  --nt-hdr-border:   rgba(199,217,250,0.10);
+
+  --nt-text-hi:    rgba(215,228,252,0.90);
+  --nt-text-md:    rgba(199,217,250,0.72);
+  --nt-text-lo:    rgba(155,182,240,0.58);
+  --nt-text-xs:    rgba(130,160,210,0.48);
+  --nt-text-ghost: rgba(100,130,190,0.30);
+
+  --nt-track:   rgba(199,217,250,0.08);
+  --nt-divider: rgba(199,217,250,0.08);
+  --nt-hover:   rgba(199,217,250,0.07);
+  --nt-active:  rgba(199,217,250,0.12);
+
+  --nt-btn-bg: rgba(199,217,250,0.92);
+  --nt-btn-fg: #0a0d17;
+  --nt-icon:   rgba(155,182,240,0.50);
+
+  --nt-wf-lo: rgba(126,176,245,0.45);
+  --nt-wf-hi: rgba(199,217,250,0.85);
+
+  --background:  #0a0d17;
+  --nt-dot-grid: rgba(199,217,250,0.055);
+
+  --nt-glass-brightness: 6;
+
+  --foreground: rgba(215,228,252,0.90);
+}
+
+/* ─── Shared tokens (same in both modes) ─────────────────── */
+:root {
+  --accent-amber: #f59e0b;
+  --accent-coral: #ff6b6b;
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-syne);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-syne);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  background: var(--background);
+  color: var(--nt-text-hi);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  background-image: radial-gradient(circle, var(--nt-dot-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── Nav button utility ─────────────────────────────────── */
+.nt-nav-btn {
+  color: var(--nt-text-xs);
+  background: transparent;
+  transition: color 150ms, background 150ms;
+}
+.nt-nav-btn:hover {
+  color: var(--nt-text-hi);
+  background: var(--nt-hover);
+}
+.nt-nav-btn.nt-active {
+  color: var(--nt-text-hi);
+  background: var(--nt-active);
+  font-weight: 500;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--nt-track);
+  border-radius: 2px;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+@keyframes pulse-amber {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+  50%       { opacity: 0.6; box-shadow: 0 0 0 5px transparent; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes brain-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(199,217,250,0.15)); }
+  50%       { filter: drop-shadow(0 0 18px rgba(199,217,250,0.32)); }
+}
+@keyframes splash-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1); }
+}
+
+@keyframes card-enter {
+  0%   { opacity: 0; transform: scale(0.5) translateY(14px); }
+  65%  { opacity: 1; transform: scale(1.1) translateY(-3px);  }
+  100% { opacity: 1; transform: scale(1)   translateY(0px);   }
+}
+@keyframes card-float {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes face-pop {
+  0%   { opacity: 0; transform: scale(0.55) rotate(-8deg); }
+  55%  { opacity: 1; transform: scale(1.1)  rotate(2deg);  }
+  100% { opacity: 1; transform: scale(1)    rotate(0deg);  }
+}
+@keyframes face-idle {
+  0%, 100% { transform: translateY(0px)  rotate(0deg);  }
+  30%       { transform: translateY(-7px) rotate(1.5deg);}
+  70%       { transform: translateY(-3px) rotate(-1deg); }
+}
+
+.animate-fade-up    { animation: fade-up 0.5s ease-out both; }
+.animate-pulse-dot  { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-pulse-amber{ animation: pulse-amber 2s ease-in-out infinite; }
+.animate-brain-glow { animation: brain-glow 3s ease-in-out infinite; }
+.animate-splash-dot-0 { animation: splash-pulse 1.2s ease-in-out 0s   infinite; }
+.animate-splash-dot-1 { animation: splash-pulse 1.2s ease-in-out 0.2s infinite; }
+.animate-splash-dot-2 { animation: splash-pulse 1.2s ease-in-out 0.4s infinite; }
+
+.font-display   { font-family: var(--font-syne), sans-serif; }
+.font-mono-data { font-family: var(--font-jetbrains-mono), monospace; }

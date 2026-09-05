@@ -1,0 +1,7 @@
+node_modules
+.next
+.env
+.env.*
+!.env.example
+scripts
+public/MNI152_T1_1mm.nii.gz
