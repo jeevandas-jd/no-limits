@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════
-   NeuroTrace design tokens
+   No-Limits design tokens
    All components reference var(--nt-*) so a single .dark class
    on <html> flips the entire app between modes.
    ═══════════════════════════════════════════════════════════ */

@@ -44,7 +44,7 @@ export function NeuroSidebar({
         <div className="flex items-center gap-2">
           <Brain size={18} style={{ color: "var(--nt-icon)" }} />
           <span className="text-xl font-semibold tracking-tight" style={{ color: "var(--nt-text-hi)" }}>
-            neurotrace
+            no-limits
           </span>
         </div>
       </div>

@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { NeuroTraceSplash } from "@/components/neurotrace-splash";
+import { NoLimitsSplash } from "@/components/neurotrace-splash";
 import { NeuroSidebar } from "@/components/neuro-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { type AgentCardProps } from "@/components/agent-card";
@@ -462,7 +463,7 @@ function BrainRegionsPanel() {
           </span>
         </div>
         <p style={{ color: "var(--nt-text-xs)", fontSize: 11, fontFamily: "var(--font-dm-sans)", lineHeight: 1.5 }}>
-          Neural circuits that drive language and cognition, each mapped to a NeuroTrace analysis agent.
+          Neural circuits that drive language and cognition, each mapped to a No-Limits analysis agent.
         </p>
       </div>
 
@@ -887,6 +888,8 @@ function ProcessingSteps({ steps, glass }: { steps: AgentStep[]; glass: React.CS
 export default function DashboardPage() {
   const { isDark, toggle: toggleTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState<"no-limits" | "ticease" | "memory">("no-limits");
+  const [showProductPicker, setShowProductPicker] = useState(false);
   const { entries: historyEntries, addEntry, removeEntry, clearAll } = useAnalysisHistory();
   const [hasStarted, setHasStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -1058,13 +1061,90 @@ export default function DashboardPage() {
     boxShadow: "var(--nt-glass-shadow)",
   };
 
+  const productOptions = [
+    { id: "no-limits" as const, label: "No-Limits", description: "Cognitive signature analysis", href: "/" },
+    { id: "ticease" as const, label: "TicEase", description: "Mood and tic tracking", href: "/ticease" },
+    { id: "memory" as const, label: "Memory", description: "Capture and recall moments", href: "/memory" },
+  ];
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      <NeuroTraceSplash />
+      <NoLimitsSplash />
+
+      <div className="absolute right-4 top-4 z-40">
+        <button
+          type="button"
+          onClick={() => setShowProductPicker(true)}
+          className="rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] transition hover:opacity-90"
+          style={{
+            background: "rgba(10,10,10,0.35)",
+            borderColor: "var(--nt-glass-border)",
+            color: "var(--nt-text-hi)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          Choose product
+        </button>
+      </div>
+
+      {showProductPicker && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/30 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-3xl rounded-3xl border p-6 shadow-2xl" style={{ background: "var(--nt-glass)", borderColor: "var(--nt-glass-border)" }}>
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: "var(--nt-text-ghost)" }}>
+                  Product switcher
+                </div>
+                <h2 className="mt-2 text-2xl font-semibold" style={{ color: "var(--nt-text-hi)" }}>
+                  Choose your workspace
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowProductPicker(false)}
+                className="rounded-full border px-2.5 py-1 text-xs"
+                style={{ borderColor: "var(--nt-glass-border)", color: "var(--nt-text-md)" }}
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {productOptions.map((product) => {
+                const active = selectedProduct === product.id;
+                return (
+                  <Link
+                    key={product.id}
+                    href={product.href}
+                    onClick={() => {
+                      setSelectedProduct(product.id);
+                      setShowProductPicker(false);
+                    }}
+                    className="rounded-2xl border p-4 transition hover:-translate-y-0.5 hover:border-white/30"
+                    style={{
+                      borderColor: active ? "rgba(255,255,255,0.55)" : "var(--nt-glass-border)",
+                      background: active ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.03)",
+                    }}
+                  >
+                    <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--nt-text-ghost)" }}>
+                      {active ? "Default" : "Open"}
+                    </div>
+                    <div className="text-xl font-semibold" style={{ color: "var(--nt-text-hi)" }}>
+                      {product.label}
+                    </div>
+                    <p className="mt-2 text-sm" style={{ color: "var(--nt-text-md)" }}>
+                      {product.description}
+                    </p>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Dither background */}
       <div className="fixed inset-0 z-0 h-screen w-screen">
-        
       </div>
 
       {/* App shell */}
@@ -1202,7 +1282,7 @@ export default function DashboardPage() {
                       textShadow: "0 0 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.14)",
                     }}
                   >
-                    neurotrace
+                    No-Limits
                   </span>
                   <span
                     className="text-[11px] tracking-[0.32em] uppercase font-medium"

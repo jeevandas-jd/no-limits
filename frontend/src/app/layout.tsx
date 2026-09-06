@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeuroTrace",
+  title: "No-Limits",
   description:
     "Agentic AI pipeline mapping cognitive signatures onto a 3D brain atlas via linguistic biomarker analysis.",
 };

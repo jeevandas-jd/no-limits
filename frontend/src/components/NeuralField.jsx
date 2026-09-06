@@ -3,7 +3,7 @@
 /**
  * NeuralField — bioluminescent synaptic flow field
  *
- * Palette mirrors the NeuroTrace design system:
+ * Palette mirrors the No-Limits design system:
  *   --background  #080a0e  deep near-black
  *   --accent-cyan #00e5ff  electric cyan (dominant signal traces)
  *   --accent-amber #f59e0b warm amber (activation heat)

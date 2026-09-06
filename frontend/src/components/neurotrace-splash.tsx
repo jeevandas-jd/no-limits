@@ -12,7 +12,7 @@ const FACES = [
 
 const CYCLE_MS = 600;
 
-export function NeuroTraceSplash({
+export function NoLimitsSplash({
   minDisplayMs = 4400,
   readyToFade,
   onFadeComplete,
@@ -95,7 +95,7 @@ export function NeuroTraceSplash({
             fontFamily: "var(--font-syne), sans-serif",
           }}
         >
-          neurotrace
+          No-Limits
         </span>
         <span
           className="text-sm tracking-widest uppercase"

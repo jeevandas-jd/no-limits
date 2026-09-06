@@ -16,7 +16,7 @@ export type HistoryEntry = {
   audioDuration?: number;
 };
 
-const STORAGE_KEY = "neurotrace_history";
+const STORAGE_KEY = "no_limits_history";
 const MAX_ENTRIES = 50;
 
 function load(): HistoryEntry[] {

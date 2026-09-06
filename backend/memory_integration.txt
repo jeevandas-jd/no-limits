@@ -1,0 +1,34 @@
+NO LIMITS MEMORY BACKEND INTEGRATION
+====================================
+
+1. Copy memory_service.py and memory_api.py beside your existing main.py.
+
+2. In backend/main.py, add:
+
+    from memory_api import router as memory_router
+
+   and after creating your FastAPI app:
+
+    app.include_router(memory_router)
+
+3. Make sure FastAPI and Pydantic are already installed. They normally are
+   in an existing FastAPI backend.
+
+4. If your frontend is running on localhost:3000, make sure your backend
+   allows CORS for it. If you already have CORSMiddleware, keep it.
+
+5. Start backend from backend/:
+
+    python main.py
+
+   or your existing uvicorn command.
+
+The memory engine stores data in backend/memory_data.json. Add this file to
+.gitignore if you don't want demo/user data committed.
+
+IMPORTANT:
+- The original user text is always retained.
+- The extractor is conservative and does not intentionally invent missing
+  details.
+- This is a hackathon MVP. Replace memory_service.py's extraction and
+  reasoning functions with your preferred LLM + graph database later.
